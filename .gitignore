@@ -1,4 +1,4 @@
 /backend/backend/gcp/datastore/credentials.json
 /backend/.env
 /backend/backend/__pycache__
-.DS_Store
+.DS_Stor
