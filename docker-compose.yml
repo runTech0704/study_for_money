@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  django:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/backend/gcp/datastore/credentials.json
+    ports:
+      - "8000:8000"
+
+  react:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
