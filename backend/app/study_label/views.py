@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from rest_framework import views
 from rest_framework.response import Response
@@ -15,9 +16,9 @@ class StudyLabelView(views.APIView):
             serializer = StudyLabelSerializer(entity)
             return Response(serializer.data)
         else:
-            Response(status=404)
+            return HttpResponse("Hello World")
 
-    def create(self, request):
+    def post(self, request):
         serializer = StudyLabelSerializer(data=request.data)
         if serializer.id_valid():
             entity = StudyLabelService.create(serializer.validated_data)

@@ -1,21 +1,22 @@
 import uuid
 
-from backend.core.datastore.utils import SetUpDatastoreClient
+from core.datastore.utils import SetUpDatastoreClient
 
 from .models import StudyLabel
 
 
-class StudyLabelService():
+class StudyLabelService:
 
-    client = SetUpDatastoreClient.setup_client()
-
-    def get_entity(self, study_label_id):
-        key = self.client.key('StudyLabel', study_label_id)
-        entity = self.client.get(key)
+    @classmethod
+    def get_entity(cls, study_label_id):
+        client = setup_client()
+        key = client.key('StudyLabel', study_label_id)
+        entity = client.get(key)
         return entity
 
     def create(self, **kwargs):
-        with self.client.context():
+        client = setup_client()
+        with client.context():
             entity = StudyLabel(
                 study_label_name=kwargs['study_label_name'],
                 study_label_id=self._create_random_id
@@ -25,3 +26,7 @@ class StudyLabelService():
 
     def _create_random_id(self):
         return str(uuid.uuid4())
+
+
+def setup_client():
+    return SetUpDatastoreClient.setup_client()

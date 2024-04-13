@@ -1,6 +1,7 @@
 from google.cloud import datastore
 
-class SetUpDatastoreClient():
+class SetUpDatastoreClient:
 
-    def setup_client(self):
+    @classmethod
+    def setup_client(cls):
         return datastore.Client()
