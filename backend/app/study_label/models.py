@@ -1,6 +1,6 @@
 import uuid
 
-from google.appengine.ext import ndb
+from google.cloud import ndb
 
 
 # Create your models here.
