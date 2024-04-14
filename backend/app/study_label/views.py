@@ -12,15 +12,17 @@ class StudyLabelView(views.APIView):
 
     def get(self, request, **kwargs):
         study_label_id = kwargs.get('study_label_id', None)
-        if study_label_id is None:
-            return Response({"error": "Method GET requires an ID."}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            entity = StudyLabelService.get_entity(study_label_id)
-            return Response(StudyLabelSerializer(entity).data)
-        except ValueError as e:
-            return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
-
+        # GET method
+        if study_label_id:
+            try:
+                entity = StudyLabelService.get_entity(study_label_id)
+                return Response(StudyLabelSerializer(entity).data)
+            except ValueError as e:
+                return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
+        # LIST method
+        else:
+            entities = StudyLabelService.list()
+            return Response(StudyLabelSerializer(entities, many=True).data)
 
     def post(self, request):
         serializer = StudyLabelSerializer(data=request.data)

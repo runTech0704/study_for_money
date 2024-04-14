@@ -15,6 +15,14 @@ class StudyLabelService:
         return entity
 
     @classmethod
+    def list(cls):
+        client = setup_client()
+        with client.context():
+            query = StudyLabel.query()
+            entities = list(query.fetch())
+            return entities
+
+    @classmethod
     def create(cls, data):
         client = setup_client()
         with client.context():

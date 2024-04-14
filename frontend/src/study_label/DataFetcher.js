@@ -7,7 +7,7 @@ function StudyLabelDataFetcher() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/study-label/label/ahaha') // 適切なエンティティIDを指定
+    fetch('http://localhost:8000/api/study-label/label/') // 適切なエンティティIDを指定
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
