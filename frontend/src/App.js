@@ -1,10 +1,12 @@
-import StudyLabelDataFetcher from './study_label/DataFetcher'
+import StudyLabelListDataFetcher from './study_label/ListDataFetcher'
+import CreateLabel from './study_label/CreateDataFetcher'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <StudyLabelDataFetcher />
+        <StudyLabelListDataFetcher />
+        <CreateLabel />
       </header>
     </div>
   );

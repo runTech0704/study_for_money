@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './DataFetcher.css'
+import './ListDataFetcher.css'
 
-function StudyLabelDataFetcher() {
+function StudyLabelListDataFetcher() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,4 +38,4 @@ function StudyLabelDataFetcher() {
   );
 }
 
-export default StudyLabelDataFetcher;
+export default StudyLabelListDataFetcher;
