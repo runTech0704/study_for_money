@@ -14,19 +14,46 @@ class StudyLabelService:
         entity = client.get(key)
         return entity
 
-    def create(self, **kwargs):
+    @classmethod
+    def create(cls, data):
         client = setup_client()
         with client.context():
             entity = StudyLabel(
-                study_label_name=kwargs['study_label_name'],
-                study_label_id=self._create_random_id
+                study_label_name=data['study_label_name'],
+                study_label_id=_create_random_id()
             )
             entity.put()
             return entity
 
-    def _create_random_id(self):
-        return str(uuid.uuid4())
+    @classmethod
+    def update(cls, study_label_id, data):
+        client = setup_client()
+        with client.context():
+            key = client.key('StudyLabel', study_label_id)
+            entity = client.get(key)
+
+            if not entity:
+                raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
+
+            for field, value in data.items():
+                setattr(entity, field, value)
+
+            entity.put()
+            return entity
+
+    @classmethod
+    def delete(cls, study_label_id):
+        client = setup_client()
+        with client.context():
+            key = client.key('StudyLabel', study_label_id)
+            entity = client.get(key)
+            if not entity:
+                raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
+            client.delete(key)
 
 
 def setup_client():
     return SetUpDatastoreClient.setup_client()
+
+def _create_random_id():
+    return str(uuid.uuid4())
