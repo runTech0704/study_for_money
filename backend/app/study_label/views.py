@@ -26,7 +26,7 @@ class StudyLabelView(views.APIView):
 
     def post(self, request):
         serializer = StudyLabelSerializer(data=request.data)
-        if serializer.id_valid():
+        if serializer.is_valid():
             entity = StudyLabelService.create(serializer.validated_data)
             return Response(
                 StudyLabelSerializer(entity).data
