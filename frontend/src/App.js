@@ -1,14 +1,21 @@
-import StudyLabelListDataFetcher from './study_label/ListDataFetcher'
+import StudyLabelList from './study_label/pages/study_label.list'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CreateLabel from './study_label/CreateDataFetcher'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <StudyLabelListDataFetcher />
-        <CreateLabel />
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/study-label/:id">
+            <CreateLabel />
+          </Route>
+          <Route path="/study-label">
+            <StudyLabelList />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
