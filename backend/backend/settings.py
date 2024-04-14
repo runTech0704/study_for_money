@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'demo_app',
     'app.study_label'
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,6 +62,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# CORS 設定
+# TODO: 本番用の設定について要調査
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
