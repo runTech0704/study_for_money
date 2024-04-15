@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import StudyLabelDetails from './pages/study_label.detail';
+import StudyLabelDetails from '../pages/study_label.detail';
 
 const StudyLabelDetailFetcher = (id) => {
     const [data, setEntity] = useState(null);

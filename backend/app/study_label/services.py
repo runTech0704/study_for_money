@@ -48,6 +48,7 @@ class StudyLabelService:
             if not entity:
                 raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
 
+            data['study_label_id'] = study_label_id
             for field, value in data.items():
                 setattr(entity, field, value)
 
@@ -62,7 +63,7 @@ class StudyLabelService:
             entity = key.get()
             if not entity:
                 raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
-            client.delete(key)
+            key.delete()
 
 
 def setup_client():

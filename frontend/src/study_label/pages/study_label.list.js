@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // react-router-domがインストールされている必要があります
-import StudyLabelListFetcher from '../ListDataFetcher';
+import StudyLabelListFetcher from '../hook/ListDataFetcher';
 
 const StudyLabelList = () => {
     const { data, loading, error } = StudyLabelListFetcher();
