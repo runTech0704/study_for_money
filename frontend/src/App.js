@@ -1,6 +1,7 @@
 import StudyLabelList from './study_label/pages/study_label.list'
+import StudyLabelDetail from './study_label/pages/study_label.detail'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CreateLabel from './study_label/CreateDataFetcher'
+import CreateLabel from './study_label/CreateDataFetcher';
 
 function App() {
   return (
@@ -8,10 +9,11 @@ function App() {
       <div>
         <Switch>
           <Route path="/study-label/:id">
-            <CreateLabel />
+            <StudyLabelDetail />
           </Route>
           <Route path="/study-label">
             <StudyLabelList />
+            <CreateLabel />
           </Route>
         </Switch>
       </div>
