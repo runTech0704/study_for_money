@@ -7,7 +7,7 @@ const StudyLabelDetailFetcher = (id) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/study-label/label/${id}`)
+        fetch(`http://localhost:8000/api/study-label/${id}/`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

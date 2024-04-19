@@ -16,7 +16,7 @@ urlpatterns = [
     path('api/', include(api_urlpatterns)),
 
     # Applications
-    path('study-label', TemplateView.as_view(template_name='index.html')),
+    path('study-label/', TemplateView.as_view(template_name='index.html')),
 
     # test path
     path('test/', include(test_urlpatterns))

@@ -7,7 +7,7 @@ const StudyLabelUpdateFetcher = () => {
     const updateEntity = async (id, data) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/study-label/label/${id}`, {
+            const response = await fetch(`http://localhost:8000/api/study-label/${id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

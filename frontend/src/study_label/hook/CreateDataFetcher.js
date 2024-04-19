@@ -12,7 +12,7 @@ function CreateLabel() {
     setMessage('');
 
     // 以下のURLは実際のAPIエンドポイントに置き換えてください
-    fetch('http://localhost:8000/api/study-label/label/', {
+    fetch('http://localhost:8000/api/study-label/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
