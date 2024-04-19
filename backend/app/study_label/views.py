@@ -11,16 +11,22 @@ from .services import StudyLabelService
 class StudyLabelView(views.APIView):
 
     def get(self, request, **kwargs):
-        entity = StudyLabelService.get_entity(study_label_id=kwargs['study_label_id'])
-        if entity:
-            serializer = StudyLabelSerializer(entity)
-            return Response(serializer.data)
+        study_label_id = kwargs.get('study_label_id', None)
+        # GET method
+        if study_label_id:
+            try:
+                entity = StudyLabelService.get_entity(study_label_id)
+                return Response(StudyLabelSerializer(entity).data)
+            except ValueError as e:
+                return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
+        # LIST method
         else:
-            return HttpResponse("Hello World")
+            entities = StudyLabelService.list()
+            return Response(StudyLabelSerializer(entities, many=True).data)
 
     def post(self, request):
         serializer = StudyLabelSerializer(data=request.data)
-        if serializer.id_valid():
+        if serializer.is_valid():
             entity = StudyLabelService.create(serializer.validated_data)
             return Response(
                 StudyLabelSerializer(entity).data

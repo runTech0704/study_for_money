@@ -1,7 +1,7 @@
-from google.cloud import datastore
+from google.cloud import ndb
 
 class SetUpDatastoreClient:
 
     @classmethod
     def setup_client(cls):
-        return datastore.Client()
+        return ndb.Client()
