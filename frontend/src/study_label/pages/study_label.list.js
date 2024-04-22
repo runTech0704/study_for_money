@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // react-router-domがインストールされている必要があります
+import { Link } from 'react-router-dom';
 import StudyLabelListFetcher from '../hook/ListDataFetcher';
 
 const StudyLabelList = () => {
@@ -18,6 +18,7 @@ const StudyLabelList = () => {
                     </li>
                 ))}
             </ul>
+            <Link to={`/study-label/create`}>create</Link>
         </div>
     );
 };

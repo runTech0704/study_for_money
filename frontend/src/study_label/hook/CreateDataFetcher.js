@@ -1,59 +1,41 @@
-import React, { useState } from 'react';
-import './CreateDataFetcher.css'
+import { useState } from 'react';
 
-function CreateLabel() {
-  const [study_label_name, setName] = useState('');
+function CreateDataFetcher() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setMessage('');
-
-    // 以下のURLは実際のAPIエンドポイントに置き換えてください
-    fetch('http://localhost:8000/api/study-label/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ study_label_name }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      setIsLoading(false);
-      setMessage('Entity created successfully!');
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      setIsLoading(false);
-      setMessage('Error creating entity');
-      console.error('Error:', error);
-    });
+  const createLabel = (study_label_name) => {
+      setIsLoading(true);
+      setMessage('');
+      // fetch() の Promise を直接 return する
+      return fetch('http://localhost:8000/api/study-label/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ study_label_name })
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          setIsLoading(false);
+          setMessage('Entity created successfully!');
+          console.log('Success:', data);
+          return data;  // data を return して then() チェーンを可能にする
+      })
+      .catch((error) => {
+          setIsLoading(false);
+          setMessage('Error creating entity');
+          console.error('Error:', error);
+          throw error;  // エラーを再スローして catch() チェーンを可能にする
+      });
   };
 
-  return (
-    <div>
-      <h2>Create New Entity</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Label Name:
-            <input
-              type="text"
-              value={study_label_name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Creating...' : 'Create'}
-        </button>
-      </form>
-      {message && <p>{message}</p>}
-    </div>
-  );
+  return { createLabel, isLoading, message };
 }
 
-export default CreateLabel;
+export default CreateDataFetcher;
