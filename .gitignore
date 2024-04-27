@@ -2,3 +2,10 @@
 /backend/.env
 /backend/backend/__pycache__
 .DS_Store
+/backend/db.sqlite3
+
+./backend/static/css/main.350aaa09.css.map
+./backend/static/js/*chunk.js
+./backend/static/js/*chunk.js.map
+./backend/static/js/*.js.LICENSE.txt
+./backend/static/js/*.js.map
