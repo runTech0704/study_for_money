@@ -6,6 +6,7 @@ WORKDIR /app
 
 # 依存関係のインストール
 COPY package.json /app/
+COPY package-lock.json /app/
 RUN npm install
 
 # アプリケーションのコピー
