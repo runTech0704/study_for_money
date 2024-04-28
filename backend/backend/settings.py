@@ -15,10 +15,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ENVIRONMENT = os.getenv('DJANGO_ENV', 'development')
+if ENVIRONMENT == 'production':
+    # 本番環境
+    DEBUG = False
+    ALLOWED_HOSTS = ['runrun-348404.an.r.appspot.com']
+else:
+    # 開発環境
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -123,6 +128,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+# `collectstatic`が集める静的ファイルのルートディレクトリ
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

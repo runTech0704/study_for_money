@@ -1,5 +1,5 @@
-runtime: python39
-entrypoint: gunicorn -b :$PORT study-for-money.wsgi
+runtime: python310
+entrypoint: gunicorn -b :$PORT backend.wsgi:application
 
 automatic_scaling:
   min_idle_instances: automatic
@@ -12,8 +12,12 @@ env: standard
 instance_class: F1
 
 env_variables:
+  DJANGO_ENV: 'production'
   DJANGO_SECRET_KEY: django-insecure-ndd#p$e)lz=bo#7s3_yakzxt2k78q-e43@go3autz6h_)3br=0
   DJANGO_DEBUG: 'False'
+  GOOGLE_CLOUD_PROJECT: "runrun-348404"
+  GOOGLE_APPLICATION_CREDENTIALS: "./backend/gcp/datastore/credentials.json"
+
 
 handlers:
 - url: /static

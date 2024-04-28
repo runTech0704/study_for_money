@@ -8,7 +8,7 @@ const StudyLabelDeleteFetcher = () => {
     const deleteEntity = async (id) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/study-label/${id}/`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/study-label/${id}/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

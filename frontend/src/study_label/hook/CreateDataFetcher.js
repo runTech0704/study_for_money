@@ -8,7 +8,7 @@ function CreateDataFetcher() {
       setIsLoading(true);
       setMessage('');
       // fetch() の Promise を直接 return する
-      return fetch('http://localhost:8000/api/study-label/', {
+      return fetch(`${process.env.REACT_APP_API_URL}/study-label/`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
