@@ -1,0 +1,26 @@
+runtime: python310
+entrypoint: gunicorn -b :$PORT backend.wsgi:application
+
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: 1
+  min_pending_latency: 3000ms
+  max_pending_latency: automatic
+  max_instances: 2
+
+env: standard
+instance_class: F1
+
+env_variables:
+  DJANGO_ENV: 'production'
+  DJANGO_SECRET_KEY: django-insecure-ndd#p$e)lz=bo#7s3_yakzxt2k78q-e43@go3autz6h_)3br=0
+  DJANGO_DEBUG: 'False'
+  GOOGLE_CLOUD_PROJECT: "runrun-348404"
+  GOOGLE_APPLICATION_CREDENTIALS: "./backend/gcp/datastore/credentials.json"
+
+
+handlers:
+- url: /static
+  static_dir: static/
+- url: /.*
+  script: auto
