@@ -4,6 +4,7 @@
 .DS_Store
 /backend/db.sqlite3
 /backend/.gcloudignore
+/backend/app/*/migrations
 
 backend/staticfiles
 /backend/static/css/main.350aaa09.css.map
