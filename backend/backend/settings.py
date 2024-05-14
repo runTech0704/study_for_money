@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'demo_app',
-    'app.study_label'
+    'app.study_label',
+    'app.accounts',
 ]
 
 MIDDLEWARE = [

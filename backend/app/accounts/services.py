@@ -8,10 +8,10 @@ from .models import User
 class UserService:
 
     @classmethod
-    def get_user(cls, study_label_id):
+    def get_user(cls, user_id):
         client = setup_client()
         with client.context():
-            key = _create_study_label_key(study_label_id)
+            key = _create_user_key(user_id)
             entity = key.get()
             return entity
 
@@ -19,7 +19,7 @@ class UserService:
     def list(cls):
         client = setup_client()
         with client.context():
-            query = StudyLabel.query()
+            query = User.query()
             entities = list(query.fetch())
             return entities
 
@@ -28,26 +28,27 @@ class UserService:
         client = setup_client()
         with client.context():
             user_id = _create_random_id()
-            key = _create_study_label_key(study_label_id)
-            entity = StudyLabel(
-                key = key,
-                study_label_name=data['study_label_name'],
-                study_label_id=study_label_id
+            key = _create_user_key(user_id)
+            entity = User(
+                key=key,
+                username=data['username'],
+                user_id=user_id,
+                wallet=0
             )
             entity.put()
             return entity
 
     @classmethod
-    def update(cls, study_label_id, data):
+    def update(cls, user_id, data):
         client = setup_client()
         with client.context():
-            key = _create_study_label_key(study_label_id)
+            key = _create_user_key(user_id)
             entity = key.get()
 
             if not entity:
-                raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
+                raise ValueError("Entity: User not found with ID: {}".format(user_id))
 
-            data['study_label_id'] = study_label_id
+            data['user_id'] = user_id
             for field, value in data.items():
                 setattr(entity, field, value)
 
@@ -55,13 +56,13 @@ class UserService:
             return entity
 
     @classmethod
-    def delete(cls, study_label_id):
+    def delete(cls, user_id):
         client = setup_client()
         with client.context():
-            key = _create_study_label_key(study_label_id)
+            key = _create_user_key(user_id)
             entity = key.get()
             if not entity:
-                raise ValueError("Entity: StudyLabel not found with ID: {}".format(study_label_id))
+                raise ValueError("Entity: User not found with ID: {}".format(study_label_id))
             key.delete()
 
 
@@ -71,5 +72,5 @@ def setup_client():
 def _create_random_id():
     return str(uuid.uuid4())
 
-def _create_study_label_key(study_label_id):
-    return ndb.Key('StudyLabel', study_label_id, namespace="")
+def _create_user_key(user_id):
+    return SetUpDatastoreClient.create_key('User', user_id, namespace="")
