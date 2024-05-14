@@ -65,6 +65,14 @@ class UserService:
                 raise ValueError("Entity: User not found with ID: {}".format(study_label_id))
             key.delete()
 
+    @classmethod
+    def authenticate_user(cls, user_id, password):
+        with client.context():
+            user = User.query(User.user_id == user_id).get()
+            if user and user.check_password(password):
+                return user
+            return None
+
 
 def setup_client():
     return SetUpDatastoreClient.setup_client()

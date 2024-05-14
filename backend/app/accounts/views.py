@@ -36,7 +36,7 @@ class UserView(APIView):
     def login(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate_user(email, password)
+        user = UserService.authenticate_user(email, password)
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({
