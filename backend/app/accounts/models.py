@@ -11,8 +11,12 @@ class User(ndb.Model):
 	wallet = ndb.IntegerProperty(default=0, min_value=0)
 	is_author = ndb.BooleanProperty(default=False, required=False)
 
-	def set_password(self, password):
-        self.password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+	def set_password(self, inputted_password):
+		password_bytes = inputted_password.encode('utf-8')
+		hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
+		self.password = hashed_password.decode('utf-8')
 
-    def check_password(self, password):
-        return bcrypt.checkpw(password.encode('utf-8'), self.hashed_password.encode('utf-8'))
+    def check_password(self, inputted_password):
+		password_bytes = inputted_password.encode('utf-8')
+		hashed_password_bytes = self.password.encode('utf-8')
+		return bcrypt.checkpw(password_bytes, hashed_password_bytes)
