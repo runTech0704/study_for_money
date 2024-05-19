@@ -8,4 +8,4 @@ class SetUpDatastoreClient:
 
     @classmethod
     def create_key(cls, resource, resource_id, namespace=""):
-        return ndb.Key(resource, resource_id, namespace)
+        return ndb.Key(resource, resource_id, namespace=namespace)

@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import UserRegister from './pages/userRegister'
 import UserLogin from './pages/userLogin'
 import UserSettings from './pages/userSettings'

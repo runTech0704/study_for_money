@@ -35,6 +35,7 @@ class UserService:
                 user_id=user_id,
                 wallet=0
             )
+            entity.set_password(data['password'])
             entity.put()
             return entity
 
@@ -66,9 +67,10 @@ class UserService:
             key.delete()
 
     @classmethod
-    def authenticate_user(cls, user_id, password):
+    def authenticate_user(cls, username, password):
+        client = setup_client()
         with client.context():
-            user = User.query(User.user_id == user_id).get()
+            user = User.query(User.username == username).get()
             if user and user.check_password(password):
                 return user
             return None

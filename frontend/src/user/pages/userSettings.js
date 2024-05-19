@@ -4,7 +4,7 @@ import useAuth from '../../hook/useAuth';
 const UserSettings = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { callApi, data, error, loading } = useAuth('/api/users/update/', 'PUT');
+  const { callApi, data, error, loading } = useAuth(`${process.env.REACT_APP_API_URL}/user/update/`, 'PUT');
 
   const handleUpdate = async (e) => {
     e.preventDefault();
