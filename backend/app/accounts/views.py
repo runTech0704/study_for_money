@@ -1,7 +1,5 @@
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-import logging
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -13,15 +11,32 @@ from .services import UserService
 
 
 class UserView(APIView):
+
+	def get(self, request, **kwargs):
+		user_id = kwargs.get('user_id', None)
+		# GET method
+		if user_id:
+			try:
+				entity = UserService.get_user(user_id)
+				return Response(UserSerializer(entity).data)
+			except ValueError as e:
+				return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
+		# LIST method
+		else:
+			entities = UserService.list()
+			return Response(UserSerializer(entities, many=True).data)
+
 	def post(self, request):
 		serializer = UserSerializer(data=request.data)
 		user = request.user
 		if serializer.is_valid():
 			user = UserService.create(serializer.validated_data)
 			refresh = RefreshToken.for_user(user)
+			user_data = UserSerializer(user).data
 			return Response({
 				'refresh': str(refresh),
 				'access': str(refresh.access_token),
+				'user_id': user_data['user_id'],
 			}, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -46,9 +61,11 @@ def login(request):
 	user = UserService.authenticate_user(username, password)
 	if user:
 		refresh = RefreshToken.for_user(user)
+		user_data = UserSerializer(user).data
 		return Response({
 			'refresh': str(refresh),
 			'access': str(refresh.access_token),
+			'user_id': user_data['user_id'],
 		}, status=status.HTTP_200_OK)
 	return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 

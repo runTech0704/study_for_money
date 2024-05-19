@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete/', UserView.as_view(), name='delete'),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
+    path('<str:user_id>/', UserView.as_view(), name='detail'),
 
     # JWT トークン
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
