@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import StudyLabelComponent from './study_label/study_label.component';
 import reportWebVitals from './reportWebVitals';
-import UserComponent from './user/userComponent';
+import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <StudyLabelComponent />
-    <UserComponent />
+    <App />
   </React.StrictMode>
 );
 

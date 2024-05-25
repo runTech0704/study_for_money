@@ -18,7 +18,10 @@ urlpatterns = [
     path('api/', include(api_urlpatterns)),
 
     # Applications
-    path('study-label/', TemplateView.as_view(template_name='index.html')),
+    path('study-label', TemplateView.as_view(template_name='index.html')),
+    path('user/login', TemplateView.as_view(template_name='index.html')),
+    path('user/register', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html')),
 
     # test path
     path('test/', include(test_urlpatterns))

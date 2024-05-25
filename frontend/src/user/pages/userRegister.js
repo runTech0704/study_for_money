@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import useAuth from '../../hook/useAuth';
+import { useUser } from '../../hook/userContext';
 
 const UserRegister = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { callApi, data, error, loading } = useAuth(`${process.env.REACT_APP_API_URL}/user/register/`, 'POST');
   const history = useHistory();
+  const { setUser } = useUser();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -15,9 +18,10 @@ const UserRegister = () => {
 
   useEffect(() => {
     if (data && data.user_id) {
+      setUser({ id: data.user_id });
       history.push(`/user/${data.user_id}/detail`);
     }
-  }, [data, history]);
+  }, [data, history, setUser]);
 
   return (
     <form onSubmit={handleRegister}>
