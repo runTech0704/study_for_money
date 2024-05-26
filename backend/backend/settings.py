@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'demo_app',
     'app.accounts',
     'app.study_label',
+    'app.accounts.wallet',
 ]
 
 MIDDLEWARE = [

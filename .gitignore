@@ -5,6 +5,7 @@
 /backend/db.sqlite3
 /backend/.gcloudignore
 /backend/app/*/migrations
+/backend/app/*/*/migrations
 
 backend/staticfiles
 /backend/static/css/*.css.map
