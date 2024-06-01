@@ -8,8 +8,8 @@ from .wallet.views import WalletView, account
 urlpatterns = [
 
     # Wallet Resource
-    path('wallet/<str:user_id>/accounts', account, name='account'),
-    path('wallet/<str:user_id>', WalletView.as_view(), name='wallet'),
+    path('wallet/<str:user_id>/accounts/', account, name='account'),
+    path('wallet/<str:user_id>/', WalletView.as_view(), name='wallet'),
 
     # JWT Token
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

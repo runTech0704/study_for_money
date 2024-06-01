@@ -17,9 +17,8 @@ class WalletView(APIView):
 		if user_id:
 			try:
 				user = UserService.get_user(user_id)
-				data = UserSerializer(entity).data
-				wallet = data['wallet']
-				return Response(wallet)
+				data = UserSerializer(user).data
+				return Response(data)
 			except ValueError as e:
 				return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
 
