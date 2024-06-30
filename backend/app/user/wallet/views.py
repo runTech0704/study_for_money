@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-from app.accounts.serializers import UserSerializer
-from app.accounts.services import UserService
+from app.user.serializers import UserSerializer
+from app.user.services import UserService
 
 
 class WalletView(APIView):

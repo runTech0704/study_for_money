@@ -46,9 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'demo_app',
-    'app.accounts',
+    'app.user',
     'app.study_label',
-    'app.accounts.wallet',
+    'app.user.wallet',
 ]
 
 MIDDLEWARE = [
