@@ -9,8 +9,8 @@ test_urlpatterns = [
 
 api_urlpatterns = [
     path('study-label/', include('app.study_label.urls')),
-
     path('user/', include('app.user.urls')),
+    path('accounting/', include('app.accounting.urls')),
 ]
 
 urlpatterns = [

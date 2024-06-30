@@ -1,9 +1,9 @@
 
 
 class AccountingService:
-    u"""
+	u"""
 		お金の動きについて制御するサービス
-    """
+	"""
 
 	HOUR = 3600
 	MINUTES = 60
