@@ -20,12 +20,20 @@ if ENVIRONMENT == 'production':
     # 本番環境
     DEBUG = False
     ALLOWED_HOSTS = ['runrun-348404.an.r.appspot.com']
+    CSRF_COOKIE_SECURE = True
 else:
     # 開発環境
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:3000",
+    ]
+    CSRF_COOKIE_SECURE = False
 
-
+CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'demo_app',
-    'app.study_label'
+    'app.accounts',
+    'app.study_label',
+    'app.accounts.wallet',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +149,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Google Cloud Datastore 設定
 GOOGLE_CLOUD_PROJECT = os.getenv('GOOGLE_CLOUD_PROJECT')
+
+# JWT トークン
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'user_id',
+}
